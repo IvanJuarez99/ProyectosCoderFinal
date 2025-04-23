@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>Nuevo Artículo</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.titulo.id_for_label }}">Título:</label>
+            {{ form.titulo }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.contenido.id_for_label }}">Link de GitHub:</label>
+            {{ form.contenido }}
+        </div>
+
+        <p><strong>Este artículo será creado a tu nombre ({{ request.user.username }})</strong></p>
+
+        <div class="form-group">
+            <label for="{{ form.categoria.id_for_label }}">Categoría:</label>
+            {{ form.categoria }}
+            <label for="{{ form.nueva_categoria.id_for_label }}">O ingresa una nueva categoría:</label>
+            {{ form.nueva_categoria }}
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-primary">
+        </div>
+    </form>
+{% endblock %}

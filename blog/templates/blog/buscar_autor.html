@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>Buscar artículos por autor</h2>
+    <form method="get">
+        <input type="text" name="autor" placeholder="Escribí un autor...">
+        <input type="submit" value="Buscar">
+    </form>
+
+    {% if articulos %}
+        <h3>Resultados:</h3>
+        <ul>
+            {% for articulo in articulos %}
+                <li>
+                    <strong>{{ articulo.titulo }}</strong><br>
+                    ✍️ Autor: <a href="{% url 'perfil_autor' code=articulo.autor.code %}">{{ articulo.autor.nombre }}</a><br> <!-- Cambiar request.user.autor.code por articulo.autor.code -->
+                    📚 Categoría: {{ articulo.categoria.nombre }}<br>
+                    🔗 GitHub: <a href="{{ articulo.contenido }}" target="_blank">{{ articulo.contenido }}</a><br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif request.GET.autor %}
+        <p>No se encontraron artículos de ese autor.</p>
+    {% endif %}
+
+    <h2>Lista de todos los autores creados</h2>
+    <ul>
+        {% for autor in todos_los_autores %}
+            <li>✍️ <a href="{% url 'perfil_autor' code=autor.code %}">{{ autor.nombre }}</a></li> <!-- Cambiar request.user.autor.code por autor.code -->
+        {% endfor %}
+    </ul>
+{% endblock %}

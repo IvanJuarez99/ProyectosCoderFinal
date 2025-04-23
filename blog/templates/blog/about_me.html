@@ -1,0 +1,66 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        body {
+            background-color: #2f2f2f;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        header {
+            background-color: #242424;
+            color: rgb(136, 136, 136);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        main {
+            width: 80%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: #3d3d3d;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #a36cd6;
+        }
+
+        p {
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Me</h1>
+    </header>
+
+    <main>
+        <ul style="list-style: none; padding: 0; margin: 20px 0; color: #dcdbdb;">
+            <li style="font-size: 1.2rem; margin-bottom: 20px;"><strong><h2>Bienvenido:</h2></strong> Me presento, soy Iván Juárez y espero que te haya gustado mi pagina</li>
+            <li style="font-size: 1.2rem; margin-bottom: 20px;"> Soy un apasionado programador de Python, actualmente enfocado en la creación de aplicaciones web utilizando Django. Me encanta resolver problemas complejos y aprender nuevas tecnologías.</li>
+            <li style="font-size: 1.2rem; margin-bottom: 20px;">He trabajado en proyectos que involucran automatización de procesos, análisis de datos, y desarrollo de sitios web dinámicos. En mi tiempo libre, disfruto explorando nuevas herramientas y mejorando mis habilidades de programación.</li>
+            <li style="font-size: 1.2rem; margin-bottom: 20px;"><strong><h2>Como contactarme?:</h2></strong> Facil, aqui tienes mis datos</li>
+            <li style="font-size: 1.2rem; margin-bottom: 20px;">📧: ivanjuarez0999@gmail.com 
+            <li style="font-size: 1.2rem; margin-bottom: 20px;">📞: +543548438953</li>
+            <li style="font-size: 1.2rem; margin-bottom: 20px;">GitHub: <a href="https://github.com/IvanJuarez99" target="_blank" style="color: #caaae8; text-decoration: underline;">https://github.com/IvanJuarez99</a>
+            </li>
+    </main>
+
+    </ul>
+</body>
+</html>
+
+{% endblock %}
+

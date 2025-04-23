@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>{{ articulo.titulo }}</h2>
+    <p>
+        <strong>Publicado por:</strong>
+        <a href="{% url 'perfil_autor' code=articulo.autor.code %}" style="color: rgb(181, 106, 235); font-weight: bold;">
+            {{ articulo.autor.nombre }}
+        </a>
+        |
+        <strong>Fecha:</strong> {{ articulo.fecha_publicacion }}
+    </p>
+    
+    <p>{{ articulo.contenido }}</p>
+
+    <div>
+        <strong>GitHub:</strong> 
+        <a href="{{ articulo.contenido }}" target="_blank">{{ articulo.contenido }}</a>
+    </div>
+
+    <hr>
+
+    <h2>Comentarios</h2>
+    
+    {% if articulo.comentarios.all %}
+    <ul style="list-style: none; padding: 0;">
+        {% for comentario in articulo.comentarios.all %}
+            <li style="background-color: #2c2c2c; padding: 1rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                    <a href="{% url 'perfil_autor' code=comentario.usuario.autor.code %}" style="color: rgb(171, 76, 239); font-weight: bold;">
+                        {{ comentario.usuario.username }}
+                    </a>
+                </div>
+                <p style="margin-bottom: 0.5rem;">{{ comentario.comentario }}</p>
+                <small style="font-size: 0.7rem; color: #a5a5a5;">Publicado el {{ comentario.fecha_creacion }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    
+    {% else %}
+        <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+    {% endif %}
+
+    <hr>
+
+    {% if user.is_authenticated %}
+        <h3>Deja un comentario</h3>
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="comentario" rows="4" cols="50" placeholder="Escribe tu comentario aquí..."></textarea><br>
+            <button type="submit">Comentar</button>
+        </form>
+    {% else %}
+        <p>Debes iniciar sesión para comentar.</p>
+    {% endif %}
+{% endblock %}

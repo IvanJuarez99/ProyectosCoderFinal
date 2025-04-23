@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>Buscar artículos por nombre</h2>
+    <form method="get">
+        <input type="text" name="query" placeholder="Escribí el nombre del articulo..." value="{{ query }}">
+        <input type="submit" value="Buscar">
+    </form>
+
+    {% if query %}
+        {% if resultados %}
+            <h2>Resultados de búsqueda para "{{ query }}":</h2>
+            <ul class="resultados">
+                {% for articulo in resultados %}
+                    <li>
+                        <strong><a href="{% url 'detalle_articulo' articulo.id %}">{{ articulo.titulo }}</a></strong><br>
+                        <span style="color: #562ea5;">👨‍💻</span> <strong>Autor:</strong> <a href="{% url 'perfil_autor' code=articulo.autor.code %}">{{ articulo.autor.nombre }}</a><br>
+                        <span style="color: #562ea5;">📚</span> <strong>Categoría:</strong> {{ articulo.categoria.nombre }}<br>
+                        <span style="color: #562ea5;">🔗</span> <strong>GitHub:</strong> 
+                        <a href="{{ articulo.contenido }}" target="_blank">{{ articulo.contenido }}</a><br>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No se encontraron artículos que coincidan con la búsqueda.</p>
+        {% endif %}
+    {% endif %}
+
+    <h2>Lista de todos los artículos creados</h2>
+    <ul class="resultados">
+        {% for articulo in todos_los_articulos %}
+            <li>
+                <strong><a href="{% url 'detalle_articulo' articulo.id %}">{{ articulo.titulo }}</a></strong><br>
+                <span style="color: #562ea5;">👨‍💻</span> <strong>Autor:</strong> <a href="{% url 'perfil_autor' code=articulo.autor.code %}">{{ articulo.autor.nombre }}</a><br>
+                <span style="color: #562ea5;">📚</span> <strong>Categoría:</strong> {{ articulo.categoria.nombre }}<br>
+                <span style="color: #562ea5;">🔗</span> <strong>GitHub:</strong> 
+                <a href="{{ articulo.contenido }}" target="_blank">{{ articulo.contenido }}</a><br>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

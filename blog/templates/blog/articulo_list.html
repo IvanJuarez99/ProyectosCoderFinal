@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="my-4">Lista de Artículos</h2>
+
+        {% if articulos %}
+            <div class="row">
+                {% for articulo in articulos %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">- {{ articulo.titulo }}</h3>
+                                <p class="card-text">
+                                    <strong>👨‍💻 Autor:</strong> {{ articulo.autor.nombre }} <br>
+                                    <strong>🔗 GitHub:</strong> <a href="{{ articulo.contenido }}" target="_blank">{{ articulo.contenido }}</a><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No hay artículos disponibles.</p>
+        {% endif %}
+    </div>
+{% endblock %}
