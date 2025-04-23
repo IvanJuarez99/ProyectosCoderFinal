@@ -27,7 +27,7 @@ def perfil_autor(request, code):
     try:
         autor = Autor.objects.get(code=code)
     except Autor.DoesNotExist:
-        return redirect('inicio')  # Redirige al inicio si no encuentra al autor
+        return redirect('inicio')
 
     articulos = Articulo.objects.filter(autor=autor)
     es_mi_perfil = request.user.autor == autor
@@ -47,7 +47,6 @@ def editar_perfil(request):
     if request.method == 'POST':
         form = AvatarForm(request.POST, request.FILES, instance=autor)
         if form.is_valid():
-            # Verificar si el archivo está en request.FILES
             if 'avatar' in request.FILES:
                 print(f"Archivo recibido: {request.FILES['avatar']}")
             else:
@@ -57,7 +56,7 @@ def editar_perfil(request):
             return redirect('perfil_autor', code=autor.code)
         else:
             print("Formulario no válido")
-            print(form.errors)  # Mostrar errores del formulario si los hay
+            print(form.errors)
     else:
         form = AvatarForm(instance=autor)
 
@@ -199,7 +198,7 @@ def about_me(request):
 def detalle_articulo(request, id):
     articulo = get_object_or_404(Articulo, id=id)
 
-    # Manejar el comentario
+
     if request.method == "POST":
         comentario_texto = request.POST.get('comentario')
         if comentario_texto:
@@ -209,7 +208,7 @@ def detalle_articulo(request, id):
                 comentario=comentario_texto
             )
             comentario.save()
-            return redirect('detalle_articulo', id=articulo.id)  # Redirige para evitar resubir el formulario
+            return redirect('detalle_articulo', id=articulo.id)
 
     return render(request, 'blog/detalle_articulo.html', {
         'articulo': articulo

@@ -53,7 +53,7 @@ class AvatarForm(forms.ModelForm):
 class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
-        fields = ['contenido']  # Solo el campo 'contenido' será visible para el usuario
+        fields = ['contenido'] 
 
     contenido = forms.CharField(widget=forms.Textarea(attrs={
         'placeholder': 'Escribe tu comentario...',
